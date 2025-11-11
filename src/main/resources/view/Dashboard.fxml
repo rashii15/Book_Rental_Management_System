@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="534.0" prefWidth="776.0" style="-fx-background-color: 14213d;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.RL.controller.DashboardFormController">
+   <children>
+      <Pane layoutX="366.0" prefHeight="540.0" prefWidth="411.0" style="-fx-background-color: a78a7f;" />
+      <Pane layoutY="-1.0" prefHeight="541.0" prefWidth="366.0" style="-fx-background-color: #0E1627;" />
+      <ImageView fitHeight="457.0" fitWidth="328.0" layoutX="38.0" layoutY="39.0">
+         <image>
+            <Image url="@../img/emil-widlund-xrbbXIXAWY0-unsplash.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="38.0" layoutY="39.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="328.0" style="-fx-background-color: #865E5A; -fx-opacity: 57%;" />
+      <Label alignment="CENTER" layoutX="106.0" layoutY="86.0" prefHeight="59.0" prefWidth="155.0" text="BORROWLY" textFill="WHITE">
+         <font>
+            <Font name="Kokonor Regular" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="72.0" layoutY="181.0" prefHeight="50.0" prefWidth="141.0" text="BORROW" textFill="WHITE">
+         <font>
+            <Font name="Charter Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="72.0" layoutY="231.0" prefHeight="50.0" prefWidth="141.0" text="READ" textFill="WHITE">
+         <font>
+            <Font name="Charter Bold" size="26.0" />
+         </font>
+      </Label>
+      <Group layoutX="72.0" layoutY="281.0">
+         <children>
+            <Label prefHeight="50.0" prefWidth="141.0" text="RETURN" textFill="WHITE">
+               <font>
+                  <Font name="Charter Bold" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Label layoutX="72.0" layoutY="338.0" prefHeight="50.0" prefWidth="141.0" text="REPEAT" textFill="WHITE">
+         <font>
+            <Font name="Charter Bold" size="26.0" />
+         </font>
+      </Label>
+      <Pane layoutX="405.0" layoutY="55.0" prefHeight="425.0" prefWidth="328.0" style="-fx-background-color: #EAD4BE;">
+         <children>
+            <Label fx:id="lblsignin" layoutX="33.0" layoutY="28.0" prefHeight="50.0" prefWidth="141.0" text="SIGN IN">
+               <font>
+                  <Font name="Courier New Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblEmail" layoutX="33.0" layoutY="95.0" prefHeight="31.0" prefWidth="99.0" text="Email">
+               <font>
+                  <Font name="Chalkduster" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPassword" layoutX="26.0" layoutY="175.0" prefHeight="31.0" prefWidth="99.0" text="Password">
+               <font>
+                  <Font name="Chalkduster" size="14.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="txtEmail" layoutX="31.0" layoutY="126.0" prefHeight="38.0" prefWidth="248.0" style="-fx-background-color: #FFFBE5;">
+               <font>
+                  <Font name="Helvetica" size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtPassword" layoutX="31.0" layoutY="219.0" prefHeight="38.0" prefWidth="248.0" style="-fx-background-color: #FFFBE5;" />
+            <JFXButton fx:id="btnSignIn" buttonType="RAISED" layoutX="83.0" layoutY="293.0" prefHeight="59.0" prefWidth="170.0" ripplerFill="#d0adaa" style="-fx-background-color: #A46761;" text="Sign In">
+               <font>
+                  <Font name="Helvetica" size="26.0" />
+               </font>
+            </JFXButton>
+            <Label fx:id="lblForgotPwd" layoutX="112.0" layoutY="352.0" onTouchPressed="#forgotpasswordlink" prefHeight="38.0" prefWidth="141.0" text="Forgot password?" textFill="#5286c9">
+               <font>
+                  <Font name="Hiragino Sans CNS W3" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <ImageView fitHeight="74.0" fitWidth="91.0" layoutX="138.0" layoutY="39.0">
+         <image>
+            <Image url="@../img/original-922aedbea5c0b60dea18fe2f29d6b202-removebg-preview.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
