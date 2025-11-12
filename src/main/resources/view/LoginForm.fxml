@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="534.0" prefWidth="776.0" style="-fx-background-color: 14213d;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.RL.controller.DashboardFormController">
+<AnchorPane prefHeight="534.0" prefWidth="776.0" style="-fx-background-color: 14213d;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.RL.controller.LoginFormController">
    <children>
       <Pane layoutX="366.0" prefHeight="540.0" prefWidth="411.0" style="-fx-background-color: a78a7f;" />
       <Pane layoutY="-1.0" prefHeight="541.0" prefWidth="366.0" style="-fx-background-color: #0E1627;" />
@@ -72,7 +72,7 @@
                </font>
             </JFXTextField>
             <JFXTextField fx:id="txtPassword" layoutX="31.0" layoutY="219.0" prefHeight="38.0" prefWidth="248.0" style="-fx-background-color: #FFFBE5;" />
-            <JFXButton fx:id="btnSignIn" buttonType="RAISED" layoutX="83.0" layoutY="293.0" prefHeight="59.0" prefWidth="170.0" ripplerFill="#d0adaa" style="-fx-background-color: #A46761;" text="Sign In">
+            <JFXButton fx:id="btnSignIn" buttonType="RAISED" layoutX="83.0" layoutY="293.0" onAction="#btnSignInOnAction" prefHeight="59.0" prefWidth="170.0" ripplerFill="#d0adaa" style="-fx-background-color: #A46761;" text="Sign In">
                <font>
                   <Font name="Helvetica" size="26.0" />
                </font>
