@@ -17,6 +17,5 @@ public class Customer {
     private String email;
     private LocalDate DOB;
     private String address;
-    private String city;
     private String postalCode;
 }

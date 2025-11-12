@@ -52,7 +52,7 @@ public class userDashboardController {
 
     @FXML
     void btnMngCustomers(ActionEvent event) {
-
+        loadUI("ManageCustomers.fxml");
     }
 
     @FXML

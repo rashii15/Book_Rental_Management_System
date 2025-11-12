@@ -1,6 +1,5 @@
 package edu.RL.controller;
 
-import com.google.protobuf.StringValue;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import edu.RL.dto.Book;
@@ -18,7 +17,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class BooksController implements Initializable{
+public class BooksFormController implements Initializable{
 
     BooksService booksService = new BooksServiceImpl();
 

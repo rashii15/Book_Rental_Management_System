@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.RL.controller.BooksController">
+<AnchorPane prefHeight="517.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.RL.controller.BooksFormController">
    <children>
       <AnchorPane prefHeight="517.0" prefWidth="795.0" style="-fx-background-color: #ffedd8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="tableviewBooks" layoutX="21.0" layoutY="63.0" prefHeight="439.0" prefWidth="562.0">
+            <TableView fx:id="tableviewBooks" layoutX="21.0" layoutY="63.0" prefHeight="439.0" prefWidth="562.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="212.0" AnchorPane.topAnchor="63.0">
               <columns>
                 <TableColumn fx:id="colBookId" prefWidth="75.0" text="BookId" />
                 <TableColumn fx:id="colTitle" prefWidth="83.0" text="Title" />
