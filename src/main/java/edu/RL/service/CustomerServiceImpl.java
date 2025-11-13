@@ -1,0 +1,73 @@
+package edu.RL.service;
+
+import edu.RL.dto.Book;
+import edu.RL.dto.Customer;
+import edu.RL.repository.CustomerRepository;
+import edu.RL.repository.CustomerRepositoryImpl;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class CustomerServiceImpl implements CustomerService{
+
+    CustomerRepository customerRepository = new CustomerRepositoryImpl();
+
+    @Override
+    public ObservableList<Customer> getAll() {
+        ObservableList<Customer> customerObservableList = FXCollections.observableArrayList();
+        try {
+            ResultSet resultSet = customerRepository.getAll();
+            while (resultSet.next()) {
+                customerObservableList.add(new Customer(
+                        resultSet.getString("customer_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("contact"),
+                        resultSet.getString("email"),
+                        resultSet.getDate("DOB").toLocalDate(),
+                        resultSet.getString("address"),
+                        resultSet.getString("postal_code"))
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return customerObservableList;
+    }
+
+    @Override
+    public String generateNextBookId() throws SQLException {
+        ResultSet resultSet = customerRepository.getNextId();
+        try {
+            if (resultSet.next()) {
+                String lastId = resultSet.getString("customer_id");
+                int idNum = Integer.parseInt(lastId.substring(1));
+                idNum++;
+                return String.format("C%03d", idNum);
+            } else {
+                return "C001";
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to generate customer Id",e);
+        }
+    }
+
+    @Override
+    public void addCustomer(Customer newcustomer) {
+        try {
+            customerRepository.addCustomer(newcustomer);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void updateCustomer(Customer updateCustomer) {
+        try {
+            customerRepository.updateCustomer(updateCustomer);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
