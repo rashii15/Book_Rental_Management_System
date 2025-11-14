@@ -37,12 +37,7 @@ public class userDashboardController {
 
     @FXML
     void initialize(){
-        btnDashboard();
-    }
-
-    @FXML
-    void btnDashboard() {
-
+        btnDashboardOnAction();
     }
 
     @FXML
@@ -57,11 +52,16 @@ public class userDashboardController {
 
     @FXML
     void btnMngRentals(ActionEvent event) {
-
+        loadUI("ManageRentals&Returns.fxml");
     }
 
     @FXML
     void btnMngUsers(ActionEvent event) {
+        loadUI("ManageUsers.fxml");
+    }
+
+    @FXML
+    void btnDashboardOnAction() {
 
     }
 
