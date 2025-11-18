@@ -2,6 +2,7 @@ package edu.RL.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import edu.RL.dto.Book;
 import edu.RL.dto.Customer;
 import edu.RL.service.CustomerService;
 import edu.RL.service.CustomerServiceImpl;
@@ -52,9 +53,6 @@ public class CustomerFormController implements Initializable {
     private TableColumn<?, ?> colpostalCode;
 
     @FXML
-    private Label lblCustomerId;
-
-    @FXML
     private TableView<Customer> tableviewCustomers;
 
     @FXML
@@ -64,7 +62,7 @@ public class CustomerFormController implements Initializable {
     private JFXTextField txtContact;
 
     @FXML
-    private JFXTextField txtDOB;
+    private JFXTextField txtCustomerId;
 
     @FXML
     private JFXTextField txtEmail;
@@ -80,7 +78,7 @@ public class CustomerFormController implements Initializable {
     @FXML
     void btnAddCustomerOnAction(ActionEvent event) {
         customerService.addCustomer(new Customer(
-                lblCustomerId.getText(),
+                txtCustomerId.getText(),
                 txtName.getText(),
                 txtContact.getText(),
                 txtEmail.getText(),
@@ -88,13 +86,19 @@ public class CustomerFormController implements Initializable {
                 txtAddress.getText(),
                 txtPostalCode.getText()
         ));
-        loadItemTable();
+        loadCustomerTable();
+    }
+
+    @FXML
+    void btnDeleteCustomerOnAction(ActionEvent event) {
+        customerService.deleteCustomer(txtCustomerId.getText());
+        loadCustomerTable();
     }
 
     @FXML
     void btnUpdateCustomerOnAction(ActionEvent event) {
         customerService.updateCustomer(new Customer(
-                lblCustomerId.getText(),
+                txtCustomerId.getText(),
                 txtName.getText(),
                 txtContact.getText(),
                 txtEmail.getText(),
@@ -102,10 +106,19 @@ public class CustomerFormController implements Initializable {
                 txtAddress.getText(),
                 txtPostalCode.getText()));
 
-        loadItemTable();
-
-
+        loadCustomerTable();
     }
+
+    @FXML
+    void btnSearchCustomerOnAction(ActionEvent event) {
+        Customer searchCustomer = customerService.searchCustomer(txtCustomerId.getText(), txtName.getText());
+        txtContact.setText(searchCustomer.getContact());
+        txtEmail.setText(searchCustomer.getEmail());
+        datePickerDOB.setValue(searchCustomer.getDOB());
+        txtAddress.setText(searchCustomer.getAddress());
+        txtPostalCode.setText(searchCustomer.getPostalCode());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
@@ -122,7 +135,7 @@ public class CustomerFormController implements Initializable {
             }
         })));
 
-        loadItemTable();
+        loadCustomerTable();
 
         setNextId();
     }
@@ -134,15 +147,15 @@ public class CustomerFormController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        lblCustomerId.setText(nextId);
+        txtCustomerId.setText(nextId);
     }
 
-    private void loadItemTable() {
+    private void loadCustomerTable() {
         tableviewCustomers.setItems(customerService.getAll());
     }
 
     private void setSelectedCustomer(Customer customer) {
-        lblCustomerId.setText(customer.getCustomerId());
+        txtCustomerId.setText(customer.getCustomerId());
         txtName.setText(customer.getCusName());
         txtContact.setText(customer.getContact());
         txtEmail.setText(customer.getEmail());

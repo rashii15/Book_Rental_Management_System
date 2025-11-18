@@ -1,11 +1,14 @@
 package edu.RL.service;
 
+import edu.RL.dto.Customer;
 import edu.RL.dto.Rental;
 import edu.RL.dto.User;
 import edu.RL.repository.UserRepository;
 import edu.RL.repository.UserRepositoryImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,11 +24,11 @@ public class UserServiceImpl implements UserService {
             ResultSet resultSet = userRepository.getAll();
             while (resultSet.next()) {
                 userObservableList.add(new User(
-                        resultSet.getString("user_id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("role"),
-                        resultSet.getString("role")
+                                resultSet.getString("user_id"),
+                                resultSet.getString("username"),
+                                resultSet.getString("password"),
+                                resultSet.getString("role"),
+                                resultSet.getString("role")
                         )
                 );
             }
@@ -48,7 +51,7 @@ public class UserServiceImpl implements UserService {
                 return "U001";
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Failed to generate user Id",e);
+            throw new RuntimeException("Failed to generate user Id", e);
         }
     }
 
@@ -78,4 +81,64 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public User findByUsername(String username) {
+        try {
+            ResultSet resultSet = userRepository.findByUsername(username);
+            resultSet.next();
+            return new User(
+                    resultSet.getString("user_id"),
+                    resultSet.getString("username"),
+                    resultSet.getString("password"),
+                    resultSet.getString("role"),
+                    resultSet.getString("status")
+            );
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "This User is not in DataBase");
+            alert.show();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public User login(String username, String password) throws SQLException {
+        ResultSet resultSet = userRepository.findByUsername(username);
+        if (!resultSet.next()) {
+            return null;
+        }
+
+        User user = new User(
+                resultSet.getString("user_id"),
+                resultSet.getString("username"),
+                resultSet.getString("password"),
+                resultSet.getString("role"),
+                resultSet.getString("status")
+        );
+
+        if (BCrypt.checkpw(password, user.getPassword())) {
+            return user;
+        } else {
+            return null;
+        }
+    }
 }
+
+
+//        ResultSet resultSet = userRepository.login(username,password);
+//        try {
+//            if (resultSet.next()) {
+//                return new User(
+//                        resultSet.getString("user_id"),
+//                        resultSet.getString("username"),
+//                        resultSet.getString("password"),
+//                        resultSet.getString("role"),
+//                        resultSet.getString("status")
+//                );
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return null;
+
+

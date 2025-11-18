@@ -13,4 +13,8 @@ public interface CustomerRepository {
     void addCustomer(Customer newcustomer) throws SQLException;
 
     void updateCustomer(Customer updateCustomer) throws SQLException;
+
+    ResultSet searchCustomer(String cusId, String name) throws SQLException;
+
+    void deleteCustomer(String cusId) throws SQLException;
 }

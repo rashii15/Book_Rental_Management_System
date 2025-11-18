@@ -13,4 +13,8 @@ public interface CustomerService {
     void addCustomer(Customer customer);
 
     void updateCustomer(Customer updateCustomer);
+
+    Customer searchCustomer(String cusId, String name);
+
+    void deleteCustomer(String cusId);
 }

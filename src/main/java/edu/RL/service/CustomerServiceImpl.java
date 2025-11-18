@@ -6,9 +6,11 @@ import edu.RL.repository.CustomerRepository;
 import edu.RL.repository.CustomerRepositoryImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class CustomerServiceImpl implements CustomerService{
 
@@ -66,6 +68,36 @@ public class CustomerServiceImpl implements CustomerService{
     public void updateCustomer(Customer updateCustomer) {
         try {
             customerRepository.updateCustomer(updateCustomer);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Customer searchCustomer(String cusId, String name) {
+        try {
+            ResultSet resultSet = customerRepository.searchCustomer(cusId, name);
+            resultSet.next();
+            return new Customer(
+                    resultSet.getString("customer_id"),
+                    resultSet.getString("name"),
+                    resultSet.getString("contact"),
+                    resultSet.getString("email"),
+                    resultSet.getDate("DOB").toLocalDate(),
+                    resultSet.getString("address"),
+                    resultSet.getString("postal_code")
+            );
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "This customerID is not in DataBase");
+            alert.show();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteCustomer(String cusId) {
+        try {
+            customerRepository.deleteCustomer(cusId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

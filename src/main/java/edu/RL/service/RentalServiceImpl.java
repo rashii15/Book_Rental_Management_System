@@ -2,17 +2,23 @@ package edu.RL.service;
 
 import edu.RL.dto.Customer;
 import edu.RL.dto.Rental;
+import edu.RL.repository.BooksRepository;
+import edu.RL.repository.BooksRepositoryImpl;
 import edu.RL.repository.RentalRepository;
 import edu.RL.repository.RentalRepositoryImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class RentalServiceImpl implements RentalService{
 
     RentalRepository rentalRepository = new RentalRepositoryImpl();
+    BooksRepository booksRepository =  new BooksRepositoryImpl();
 
     @Override
     public ObservableList<Rental> getAll() {
@@ -26,7 +32,7 @@ public class RentalServiceImpl implements RentalService{
                         resultSet.getString("book_id"),
                         resultSet.getDate("issue_date").toLocalDate(),
                         resultSet.getDate("due_date").toLocalDate(),
-                        resultSet.getDate("return_date").toLocalDate(),
+                        resultSet.getDate("return_date") == null ? null : resultSet.getDate("return_date").toLocalDate(),
                         resultSet.getDouble("fine"))
                 );
             }
@@ -37,9 +43,14 @@ public class RentalServiceImpl implements RentalService{
     }
 
     @Override
-    public void addRental(Rental newRental) {
+    public boolean addRental(Rental newRental) {
         try {
-            rentalRepository.addRental(newRental);
+            boolean isadded = rentalRepository.addRental(newRental);
+
+            if (isadded){
+                booksRepository.reduceAvailableCopies(newRental.getBookId());
+            }
+            return isadded;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -66,6 +77,70 @@ public class RentalServiceImpl implements RentalService{
     public void updateRental(Rental updateRental) {
         try {
             rentalRepository.updateRental(updateRental);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Rental searchRental(String RentalId, String bookId) {
+        try {
+            ResultSet resultSet = rentalRepository.searchRental(RentalId, bookId);
+            resultSet.next();
+                return new Rental(
+                    resultSet.getString("rental_id"),
+                    resultSet.getString("customer_id"),
+                    resultSet.getString("book_id"),
+                    resultSet.getDate("issue_date").toLocalDate(),
+                    resultSet.getDate("return_date").toLocalDate(), resultSet.getDate("due_date").toLocalDate(),
+                    resultSet.getDouble("fine")
+            );
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "This customerID is not in DataBase");
+            alert.show();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteRental(String rentalId) {
+        try {
+            rentalRepository.deleteRentalr(rentalId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean isAvailable(String bookId) throws SQLException {
+        return booksRepository.isAvailable(bookId);
+    }
+
+    @Override
+    public boolean returnBook(String rentalId, String bookId) {
+        try {
+
+            Rental rental = (Rental) rentalRepository.searchRental(rentalId, bookId);
+
+            LocalDate issueDate = rental.getIssueDate();
+            LocalDate dueDate = rental.getDueDate();
+            LocalDate returnDate = LocalDate.now();
+
+            long daysLate = ChronoUnit.DAYS.between(dueDate, returnDate);
+            double fine = 0;
+            if (daysLate > 0) {
+                if (daysLate <= 30) {
+                    fine = daysLate * 20;
+                } else {
+                    fine = (30 * 20) + ((daysLate - 30) * 50);
+                }
+            }
+            boolean isReurned = rentalRepository.returnBook(rentalId,bookId,fine);
+
+            if (isReurned){
+                booksRepository.increaseAvailableCopies(bookId);
+            }
+            return isReurned;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

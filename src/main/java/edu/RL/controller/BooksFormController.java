@@ -3,6 +3,8 @@ package edu.RL.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import edu.RL.dto.Book;
+import edu.RL.dto.Rental;
+import edu.RL.dto.User;
 import edu.RL.service.BooksService;
 import edu.RL.service.BooksServiceImpl;
 import javafx.event.ActionEvent;
@@ -43,7 +45,7 @@ public class BooksFormController implements Initializable{
     private TableColumn<?, ?> colTitle;
 
     @FXML
-    private Label lblbookId;
+    private JFXTextField txtBookId;
 
     @FXML
     private JFXTextField txtAuthor;
@@ -67,15 +69,45 @@ public class BooksFormController implements Initializable{
     @FXML
     void btnAddBookOnAction(ActionEvent event) {
         booksService.addBook(new Book(
-                lblbookId.getText(),
+                txtBookId.getText(),
                 txtTitle.getText(),
                 txtAuthor.getText(),
                 txtCategory.getText(),
                 txtISBN.getText(),
                 Integer.parseInt(txtAvailableCopies.getText())
         ));
-        loadItemTable();
+        loadBookTable();
     }
+
+    @FXML
+    void btnDeleteBookOnAction(ActionEvent event) {
+        booksService.deleteBook(txtBookId.getText());
+        loadBookTable();
+    }
+
+    @FXML
+    void btnSearchBookOnAction(ActionEvent event) {
+        Book searchBook = booksService.searchBook(txtBookId.getText(), txtTitle.getText());
+        txtTitle.setText(searchBook.getTitle());
+        txtAuthor.setText(searchBook.getAuthor());
+        txtCategory.setText(searchBook.getCategory());
+        txtISBN.setText(searchBook.getIsbn());
+        txtAvailableCopies.setText(searchBook.getAvailableCopies().toString());
+    }
+
+    @FXML
+    void btnUpdateBookOnAction(ActionEvent event) {
+        booksService.updateBook(new Book(
+                txtBookId.getText(),
+                txtTitle.getText(),
+                txtAuthor.getText(),
+                txtCategory.getText(),
+                txtISBN.getText(),
+                Integer.parseInt(txtAvailableCopies.getText())
+        ));
+        loadBookTable();
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -86,24 +118,37 @@ public class BooksFormController implements Initializable{
         colISBN.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         colAvailableCopies.setCellValueFactory(new PropertyValueFactory<>("availableCopies"));
 
-//        tableviewBooks.getSelectionModel().selectedItemProperty().addListener((((observableValue, oldValue, newValue) -> {
-//            if(null!=newValue){
-//                setSelectedItem((Item) newValue);
-//            }
-        loadItemTable();
+        tableviewBooks.getSelectionModel().selectedItemProperty().addListener((((observableValue, oldValue, newValue) -> {
+            if(null!=newValue){
+                setSelectedBook((Book) newValue);
+            }
+        })));
+
+        loadBookTable();
+
         try {
             setNextId();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    private void loadItemTable(){
+
+    private void setSelectedBook(Book book) {
+        txtBookId.setText(book.getBookId());
+        txtTitle.setText(book.getTitle());
+        txtAuthor.setText(book.getAuthor());
+        txtCategory.setText(book.getCategory());
+        txtISBN.setText(book.getIsbn());
+        txtAvailableCopies.setText(String.valueOf(txtAvailableCopies.getText()));
+    }
+
+    private void loadBookTable(){
         tableviewBooks.setItems(booksService.getAll());
     }
 
     private void setNextId() throws SQLException {
         String nextId = booksService.generateNextBookId();
-        lblbookId.setText(nextId);
+        txtBookId.setText(nextId);
 
     }
 }

@@ -5,6 +5,7 @@ import edu.RL.repository.BooksRepository;
 import edu.RL.repository.BooksRepositoryImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,6 +59,44 @@ public class BooksServiceImpl implements BooksService{
             }
         } catch (SQLException e) {
             throw new RuntimeException("Failed to generate book Id",e);
+        }
+    }
+
+    @Override
+    public void updateBook(Book updateBook) {
+        try {
+            booksRepository.updateBook(updateBook);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Book searchBook(String bookId, String title) {
+        try {
+            ResultSet resultSet = booksRepository.searchBook(bookId, title);
+            resultSet.next();
+            return new Book(
+                    resultSet.getString("book_id"),
+                    resultSet.getString("title"),
+                    resultSet.getString("author"),
+                    resultSet.getString("category"),
+                    resultSet.getString("ISBN"),
+                    resultSet.getInt("availableNoOfCopies")
+            );
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "This bookID is not in DataBase");
+            alert.show();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteBook(String bookId) {
+        try {
+            booksRepository.deleteBook(bookId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

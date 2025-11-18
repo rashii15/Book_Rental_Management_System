@@ -15,4 +15,8 @@ public interface UserRepository {
     void updateUser(User updateUser) throws SQLException;
 
     void deleteUser(String userId) throws SQLException;
+
+    ResultSet login(String username, String password) throws SQLException;
+
+    ResultSet findByUsername(String username) throws SQLException;
 }

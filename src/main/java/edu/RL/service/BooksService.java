@@ -12,4 +12,10 @@ public interface BooksService {
     void addBook(Book newBook);
 
     String generateNextBookId() throws SQLException;
+
+    void updateBook(Book updateBook);
+
+    Book searchBook(String bookId, String title);
+
+    void deleteBook(String bookId);
 }

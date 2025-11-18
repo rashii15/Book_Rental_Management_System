@@ -16,4 +16,8 @@ public interface UserService {
     void updateUser(User updateUser);
 
     void deleteUser(String userId);
+
+    User findByUsername(String username);
+
+    User login(String username, String password) throws SQLException;
 }

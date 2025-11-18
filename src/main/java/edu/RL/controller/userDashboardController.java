@@ -1,6 +1,7 @@
 package edu.RL.controller;
 
 import com.jfoenix.controls.JFXButton;
+import edu.RL.dto.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,7 +25,7 @@ public class userDashboardController {
     private JFXButton btnMngRentals;
 
     @FXML
-    private JFXButton btnMngRentals1;
+    private JFXButton btnMngUsers;
 
     @FXML
     private Label lbldashboard;
@@ -34,6 +35,19 @@ public class userDashboardController {
 
     @FXML
     private Pane contentArea;
+
+    private User loggedUser;
+
+    public void setLoggedUser(User user) {
+        this.loggedUser = user;
+        applyRoleAccess();
+    }
+
+    private void applyRoleAccess() {
+        if (loggedUser.getRole().equals("STAFF")) {
+            btnMngUsers.setVisible(false);
+        }
+    }
 
     @FXML
     void initialize(){

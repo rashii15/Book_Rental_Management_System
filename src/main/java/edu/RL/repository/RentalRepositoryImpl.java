@@ -8,25 +8,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RentalRepositoryImpl implements RentalRepository{
+ public class RentalRepositoryImpl implements RentalRepository{
     @Override
     public ResultSet getAll() throws SQLException {
         return DBConnection.getInstance().getConnection().prepareStatement("SELECT * FROM rental").executeQuery();
     }
 
     @Override
-    public void addRental(Rental newRental) throws SQLException {
+    public boolean addRental(Rental newRental) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement psTm = connection.prepareStatement("INSERT INTO rental Values(? ,? ,? ,? ,? ,? ,?)");
+        PreparedStatement psTm = connection.prepareStatement("INSERT INTO rental Values(? ,? ,? ,? ,? ,? ,0)");
         psTm.setObject(1,newRental.getRentalId());
         psTm.setObject(2,newRental.getCustomerId());
         psTm.setObject(3,newRental.getBookId());
         psTm.setObject(4,newRental.getIssueDate());
         psTm.setObject(5,newRental.getDueDate());
         psTm.setObject(6,newRental.getReturnDate());
-        psTm.setObject(7,newRental.getFine());
 
-        psTm.executeUpdate();
+        return psTm.executeUpdate() >0;
     }
 
     @Override
@@ -47,5 +46,35 @@ public class RentalRepositoryImpl implements RentalRepository{
         psTm.setObject(7,updateRental.getRentalId());
 
         psTm.executeUpdate();
+    }
+
+    @Override
+    public ResultSet searchRental(String rentalId, String bookId) throws SQLException {
+        String SQL = "SELECT * FROM rental WHERE rental_id = ? OR book_id= ?";
+
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement psTm = connection.prepareStatement(SQL);
+        psTm.setObject(1,rentalId);
+        psTm.setObject(2,bookId);
+        ResultSet resultSet = psTm.executeQuery();
+        return resultSet;
+    }
+
+    @Override
+    public void deleteRentalr(String rentalId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement psTm = connection.prepareStatement("DELETE FROM customer WHERE customer_id =?");
+        psTm.setObject(1,rentalId);
+
+        psTm.executeUpdate();
+    }
+
+    @Override
+    public boolean returnBook(String rentalId, String bookId, double fine) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement psTm = connection.prepareStatement("UPDATE rental SET return_date = CURDATE(), fine =? WHERE rental_id =?");
+        psTm.setObject(1,fine);
+        psTm.setObject(2,rentalId);
+        return psTm.executeUpdate()>0;
     }
 }

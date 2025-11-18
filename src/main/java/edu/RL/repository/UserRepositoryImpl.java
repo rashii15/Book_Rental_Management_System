@@ -53,4 +53,24 @@ public class UserRepositoryImpl implements UserRepository{
 
         psTm.executeUpdate();
     }
+
+    @Override
+    public ResultSet login(String username, String password) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement psTm=connection.prepareStatement("SELECT * FROM user WHERE username=? AND password=?");
+        psTm.setObject(1,username);
+        psTm.setObject(2,password);
+
+        return psTm.executeQuery();
+
+    }
+
+    @Override
+    public ResultSet findByUsername(String username) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement psTm=connection.prepareStatement("SELECT * FROM user WHERE username=?");
+        psTm.setObject(1,username);
+
+        return psTm.executeQuery();
+    }
 }

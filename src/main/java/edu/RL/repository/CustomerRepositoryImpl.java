@@ -48,4 +48,25 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 
         psTm.executeUpdate();
     }
+
+    @Override
+    public ResultSet searchCustomer(String cusId, String name) throws SQLException {
+        String SQL = "SELECT * FROM customer WHERE customer_id = ? OR name= ?";
+
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement psTm = connection.prepareStatement(SQL);
+        psTm.setObject(1,cusId);
+        psTm.setObject(2,name);
+        ResultSet resultSet = psTm.executeQuery();
+        return resultSet;
+    }
+
+    @Override
+    public void deleteCustomer(String cusId) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement psTm = connection.prepareStatement("DELETE FROM customer WHERE customer_id =?");
+        psTm.setObject(1,cusId);
+
+        psTm.executeUpdate();
+    }
 }

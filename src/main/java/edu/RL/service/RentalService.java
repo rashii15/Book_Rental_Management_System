@@ -9,9 +9,17 @@ public interface RentalService {
 
     ObservableList<Rental> getAll();
 
-    void addRental(Rental newRental);
+    boolean addRental(Rental newRental);
 
     String generateNextRentalId() throws SQLException;
 
     void updateRental(Rental updateRental);
+
+    Rental searchRental(String RentalId, String bookId);
+
+    void deleteRental(String rentalId);
+
+    boolean isAvailable(String bookId) throws SQLException;
+
+    boolean returnBook(String rentalId, String bookId);
 }
