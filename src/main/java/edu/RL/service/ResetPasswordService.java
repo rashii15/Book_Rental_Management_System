@@ -1,0 +1,7 @@
+package edu.RL.service;
+
+import java.sql.SQLException;
+
+public interface ResetPasswordService {
+    void resetPassword(String newpassword, String confirmpassword, String email) throws SQLException;
+}

@@ -5,15 +5,21 @@ import edu.RL.dto.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
 
 public class userDashboardController {
 
+    @FXML
+    private JFXButton btnLogout;
 
     @FXML
     private JFXButton btnMngBooks;
@@ -77,6 +83,22 @@ public class userDashboardController {
     @FXML
     void btnDashboardOnAction() {
 
+    }
+
+    @FXML
+    void btnLogoutOnAction(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure you want to logout?",
+                ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            Stage stage = (Stage) btnLogout.getScene().getWindow();
+
+            Parent root = FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"));
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+        }
     }
 
     private void loadUI(String fxmlFile) {

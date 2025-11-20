@@ -86,13 +86,18 @@ public class RentalsAndReturnsFormController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "This book is currently not available");
                 alert.show();
             }
+            if (!rentalService.canBorrow(txtcusId.getText(), txtbookId.getText())) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "This customer has already borrowed this book and not returned it!");
+                alert.show();
+                return;
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         LocalDate issueDate = LocalDate.now();
 
-        LocalDate dueDate = issueDate.plusDays(7);
+        LocalDate dueDate = issueDate.plusDays(1);
 
         rentalService.addRental(new Rental(
                 txtRentalId.getText(),
@@ -142,7 +147,9 @@ public class RentalsAndReturnsFormController implements Initializable {
 
     @FXML
     void btnReturnOnAction(ActionEvent event) {
-        rentalService.returnBook(txtRentalId.getText(),txtbookId.getText());
+        double fine = rentalService.returnBook(txtRentalId.getText(),txtbookId.getText());
+        txtFine.setText(String.valueOf(fine));
+        loadRenatlTable();
     }
 
 
@@ -203,8 +210,16 @@ public class RentalsAndReturnsFormController implements Initializable {
         txtbookId.setText(rental.getBookId());
         txtIssueDate.setText(String.valueOf(rental.getIssueDate()));
         txtDueDate.setText(String.valueOf(rental.getDueDate()));
-        txtReturnDate.setText(String.valueOf(rental.getReturnDate()));
-        txtFine.setText(String.valueOf(rental.getFine()));
+        if (rental.getReturnDate() == null) {
+            txtReturnDate.setText(LocalDate.now().toString());
+
+            double fine = rentalService.calculateFine(rental);
+            txtFine.setText(String.valueOf(fine));
+        } else {
+            // Book already returned, show stored details
+            txtReturnDate.setText(rental.getReturnDate().toString());
+            txtFine.setText(String.valueOf(rental.getFine()));
+        }
     }
 }
 

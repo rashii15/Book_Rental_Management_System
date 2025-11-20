@@ -21,5 +21,9 @@ public interface RentalService {
 
     boolean isAvailable(String bookId) throws SQLException;
 
-    boolean returnBook(String rentalId, String bookId);
+    double returnBook(String rentalId, String bookId);
+
+    double calculateFine(Rental rental);
+
+    boolean canBorrow(String cusID, String bookId) throws SQLException;
 }

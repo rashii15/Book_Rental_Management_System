@@ -19,4 +19,6 @@ public interface RentalRepository {
     void deleteRentalr(String rentalId) throws SQLException;
 
     boolean returnBook(String rentalId, String bookId, double fine) throws SQLException;
+
+    ResultSet canBorrow(String cusID, String bookId) throws SQLException;
 }

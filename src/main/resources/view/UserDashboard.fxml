@@ -39,6 +39,11 @@
                         <Font name="Cochin" size="19.0" />
                      </font>
                   </JFXButton>
+                  <JFXButton fx:id="btnLogout" alignment="CENTER" buttonType="RAISED" layoutX="67.0" layoutY="449.0" onAction="#btnLogoutOnAction" prefHeight="45.0" prefWidth="116.0" style="-fx-background-color: #6B4F33;" text="Logout" textFill="WHITE">
+                     <font>
+                        <Font name="Cochin" size="19.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </Pane>
             <Pane fx:id="contentArea" layoutX="290.0" layoutY="112.0" prefHeight="517.0" prefWidth="795.0" style="-fx-background-color: #fefdeb;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="112.0">

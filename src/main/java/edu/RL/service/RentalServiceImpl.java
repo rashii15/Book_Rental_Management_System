@@ -117,15 +117,44 @@ public class RentalServiceImpl implements RentalService{
     }
 
     @Override
-    public boolean returnBook(String rentalId, String bookId) {
+    public double returnBook(String rentalId, String bookId) {
         try {
+            ResultSet resultSet = rentalRepository.searchRental(rentalId, bookId);
+            resultSet.next();
+            Rental rental = new Rental(
+                    resultSet.getString("rental_id"),
+                    resultSet.getString("customer_id"),
+                    resultSet.getString("book_id"),
+                    resultSet.getDate("issue_date").toLocalDate(),
+                    resultSet.getDate("return_date") == null ? null : resultSet.getDate("return_date").toLocalDate(), resultSet.getDate("due_date").toLocalDate(),
+                    resultSet.getDouble("fine")
+            );
 
-            Rental rental = (Rental) rentalRepository.searchRental(rentalId, bookId);
+            LocalDate returnDate = LocalDate.now(); // actual return date
+            double fine = calculateFine(rental);
+            rental.setReturnDate(returnDate);
+            rental.setFine(fine);
+            rentalRepository.updateRental(rental);  // <-- your existing update method
 
-            LocalDate issueDate = rental.getIssueDate();
+            boolean isReturned = rentalRepository.returnBook(rentalId,bookId,fine);
+
+            if (isReturned){
+                booksRepository.increaseAvailableCopies(bookId);
+            }
+            return fine;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public double calculateFine(Rental rental) {
+        if (rental.getReturnDate() != null) {
+            return rental.getFine();
+        }
+
             LocalDate dueDate = rental.getDueDate();
             LocalDate returnDate = LocalDate.now();
-
             long daysLate = ChronoUnit.DAYS.between(dueDate, returnDate);
             double fine = 0;
             if (daysLate > 0) {
@@ -135,14 +164,20 @@ public class RentalServiceImpl implements RentalService{
                     fine = (30 * 20) + ((daysLate - 30) * 50);
                 }
             }
-            boolean isReurned = rentalRepository.returnBook(rentalId,bookId,fine);
+            return fine;
+    }
 
-            if (isReurned){
-                booksRepository.increaseAvailableCopies(bookId);
+    @Override
+    public boolean canBorrow(String cusID, String bookId) throws SQLException {
+        ResultSet resultSet =  rentalRepository.canBorrow(cusID,bookId);
+        try {
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count == 0;
             }
-            return isReurned;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return false;
     }
 }

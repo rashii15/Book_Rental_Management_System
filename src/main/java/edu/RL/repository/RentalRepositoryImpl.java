@@ -63,7 +63,7 @@ import java.sql.SQLException;
     @Override
     public void deleteRentalr(String rentalId) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement psTm = connection.prepareStatement("DELETE FROM customer WHERE customer_id =?");
+        PreparedStatement psTm = connection.prepareStatement("DELETE FROM rental WHERE rental_id =?");
         psTm.setObject(1,rentalId);
 
         psTm.executeUpdate();
@@ -77,4 +77,13 @@ import java.sql.SQLException;
         psTm.setObject(2,rentalId);
         return psTm.executeUpdate()>0;
     }
-}
+
+     @Override
+     public ResultSet canBorrow(String cusID, String bookId) throws SQLException {
+         Connection connection = DBConnection.getInstance().getConnection();
+         PreparedStatement psTm = connection.prepareStatement("SELECT COUNT(*) FROM rental WHERE customer_id=? AND book_id=? AND return_date IS NULL");
+         psTm.setObject(1,cusID);
+         psTm.setObject(2,bookId);
+         return psTm.executeQuery();
+     }
+ }

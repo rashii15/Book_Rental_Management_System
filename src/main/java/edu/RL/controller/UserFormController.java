@@ -36,6 +36,10 @@ public class UserFormController implements Initializable {
     private JFXButton btnUpdateUser;
 
     @FXML
+    private TableColumn<?, ?> colEmail;
+
+
+    @FXML
     private TableColumn<?, ?> colPassword;
 
     @FXML
@@ -68,6 +72,8 @@ public class UserFormController implements Initializable {
     @FXML
     private JFXTextField txtUsername;
 
+    @FXML
+    private JFXTextField txtEmail;
 
     @FXML
     void btnAddUserOnAction(ActionEvent event) {
@@ -78,7 +84,8 @@ public class UserFormController implements Initializable {
                 txtUsername.getText(),
                 hashedPassword,
                 comboboxRole.getValue(),
-                comboboxStatus.getValue()
+                comboboxStatus.getValue(),
+                txtEmail.getText()
         ));
         loadUserTable();
     }
@@ -101,13 +108,13 @@ public class UserFormController implements Initializable {
 
     @FXML
     void btnUpdateUserOnAction(ActionEvent event) {
-        userService.updateUser(new User(
+        userService.updateUser(
                 txtUserId.getText(),
                 txtUsername.getText(),
-                txtPassword.getText(),
                 comboboxRole.getValue(),
-                comboboxStatus.getValue()
-        ));
+                comboboxStatus.getValue(),
+                txtEmail.getText()
+        );
         loadUserTable();
     }
 
@@ -118,6 +125,7 @@ public class UserFormController implements Initializable {
         colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
         colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
 
         comboboxRole.setItems(FXCollections.observableArrayList("ADMIN", "STAFF"));
         comboboxStatus.setItems(FXCollections.observableArrayList("ACTIVE", "INACTIVE"));
@@ -139,6 +147,7 @@ public class UserFormController implements Initializable {
         txtPassword.setText(user.getPassword());
         comboboxRole.setValue(user.getRole());
         comboboxStatus.setValue(user.getStatus());
+        txtEmail.setText(user.getEmail());
     }
 
     private void setNextId() {

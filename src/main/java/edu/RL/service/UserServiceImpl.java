@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -28,7 +29,8 @@ public class UserServiceImpl implements UserService {
                                 resultSet.getString("username"),
                                 resultSet.getString("password"),
                                 resultSet.getString("role"),
-                                resultSet.getString("role")
+                                resultSet.getString("status"),
+                                resultSet.getString("email")
                         )
                 );
             }
@@ -63,11 +65,10 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(e);
         }
     }
-
     @Override
-    public void updateUser(User updateUser) {
+    public void updateUser(String userId, String username, String role, String status, String email) {
         try {
-            userRepository.updateUser(updateUser);
+            userRepository.updateUser(userId,username,role,status,email);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -92,7 +93,8 @@ public class UserServiceImpl implements UserService {
                     resultSet.getString("username"),
                     resultSet.getString("password"),
                     resultSet.getString("role"),
-                    resultSet.getString("status")
+                    resultSet.getString("status"),
+                    resultSet.getString("email")
             );
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "This User is not in DataBase");
@@ -113,7 +115,8 @@ public class UserServiceImpl implements UserService {
                 resultSet.getString("username"),
                 resultSet.getString("password"),
                 resultSet.getString("role"),
-                resultSet.getString("status")
+                resultSet.getString("status"),
+                resultSet.getString("email")
         );
 
         if (BCrypt.checkpw(password, user.getPassword())) {
@@ -122,6 +125,64 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
+
+    @Override
+    public User findByEmail(String email) {
+        try {
+            ResultSet resultSet = userRepository.findByEmail(email);
+            resultSet.next();
+            return new User(
+                    resultSet.getString("user_id"),
+                    resultSet.getString("username"),
+                    resultSet.getString("password"),
+                    resultSet.getString("role"),
+                    resultSet.getString("status"),
+                    resultSet.getString("email")
+            );
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "This User is not in DataBase");
+            alert.show();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean saveOTP(String email, String otp) {
+        try {
+            return userRepository.saveOTP(email,otp);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean verifyOTP(String email, String otp) {
+        try {
+            return userRepository.verifyOTP(email, otp);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean updatePassword(Connection connection,String email, String newPassword) {
+        try {
+            return userRepository.updatePassword(connection,email, newPassword);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean deleteOTP(Connection connection,String email) {
+        try {
+            return userRepository.deleteOTP(connection,email);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
 
 
