@@ -4,7 +4,7 @@ package edu.RL.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import edu.RL.dto.User;
-import edu.RL.service.UserService;
+import edu.RL.service.Service.UserService;
 import edu.RL.service.UserServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,7 +47,7 @@ public class LoginFormController {
     @FXML
     void btnSignInOnAction(ActionEvent event) throws SQLException {
         try {
-//            UserDashboardStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/UserDashboard.fxml"))));
+
             User user = userService.login(txtUsername.getText(),txtPassword.getText());
             if(user != null) {
 

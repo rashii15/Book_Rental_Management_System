@@ -1,4 +1,4 @@
-package edu.RL.repository;
+package edu.RL.repository.Repository;
 
 import edu.RL.dto.Customer;
 
@@ -17,4 +17,6 @@ public interface CustomerRepository {
     ResultSet searchCustomer(String cusId, String name) throws SQLException;
 
     void deleteCustomer(String cusId) throws SQLException;
+
+    int getCustomerCount() throws SQLException;
 }

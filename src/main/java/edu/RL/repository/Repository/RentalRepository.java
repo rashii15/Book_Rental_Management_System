@@ -1,4 +1,4 @@
-package edu.RL.repository;
+package edu.RL.repository.Repository;
 
 import edu.RL.dto.Rental;
 
@@ -21,4 +21,6 @@ public interface RentalRepository {
     boolean returnBook(String rentalId, String bookId, double fine) throws SQLException;
 
     ResultSet canBorrow(String cusID, String bookId) throws SQLException;
+
+    int getRentalCount() throws SQLException;
 }

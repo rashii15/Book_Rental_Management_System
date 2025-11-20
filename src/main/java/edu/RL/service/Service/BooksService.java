@@ -1,4 +1,4 @@
-package edu.RL.service;
+package edu.RL.service.Service;
 
 import edu.RL.dto.Book;
 import javafx.collections.ObservableList;
@@ -18,4 +18,6 @@ public interface BooksService {
     Book searchBook(String bookId, String title);
 
     void deleteBook(String bookId);
+
+    int getBookCount();
 }

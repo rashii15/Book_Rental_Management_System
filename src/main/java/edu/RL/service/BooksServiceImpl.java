@@ -1,8 +1,9 @@
 package edu.RL.service;
 
 import edu.RL.dto.Book;
-import edu.RL.repository.BooksRepository;
+import edu.RL.repository.Repository.BooksRepository;
 import edu.RL.repository.BooksRepositoryImpl;
+import edu.RL.service.Service.BooksService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -11,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class BooksServiceImpl implements BooksService{
+public class BooksServiceImpl implements BooksService {
     BooksRepository booksRepository = new BooksRepositoryImpl();
 
     @Override
@@ -95,6 +96,15 @@ public class BooksServiceImpl implements BooksService{
     public void deleteBook(String bookId) {
         try {
             booksRepository.deleteBook(bookId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int getBookCount() {
+        try {
+            return booksRepository.getBookCount();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -1,10 +1,12 @@
-package edu.RL.service;
+package edu.RL.service.Service;
 
+import edu.RL.dto.RentalReportDTO;
 import edu.RL.dto.User;
 import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface UserService {
 
@@ -31,4 +33,7 @@ public interface UserService {
     boolean deleteOTP(Connection connection,String email);
 
     void updateUser(String userId, String username, String role, String status, String email);
+
+    List<RentalReportDTO> getDailyRentalReport() throws SQLException;
+
 }

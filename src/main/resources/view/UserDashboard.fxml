@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="653.0" prefWidth="1103.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.RL.controller.userDashboardController">
@@ -48,11 +52,89 @@
             </Pane>
             <Pane fx:id="contentArea" layoutX="290.0" layoutY="112.0" prefHeight="517.0" prefWidth="795.0" style="-fx-background-color: #fefdeb;" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="112.0">
                <children>
-                  <ImageView fitHeight="254.0" fitWidth="318.0" layoutX="46.0" layoutY="38.0">
+                  <JFXButton fx:id="btngenerateReport" buttonType="RAISED" layoutX="27.0" layoutY="386.0" onAction="#btnGenerateReportOnAction" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: d4a373;" text="Generate Today's Report" textFill="#512323">
+                     <font>
+                        <Font name="Bangla MN" size="17.0" />
+                     </font>
+                  </JFXButton>
+                  <VBox layoutX="320.0" layoutY="14.0" prefHeight="492.0" prefWidth="467.0" spacing="20.0" style="-fx-alignment: center;">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <children>
+                        <HBox prefHeight="346.0" prefWidth="469.0" spacing="20.0" style="-fx-alignment: center;">
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefHeight="346.0" prefWidth="156.0" style="-fx-background-color: #1d3557;">
+                                 <effect>
+                                    <Bloom />
+                                 </effect>
+                                 <children>
+                                    <ImageView fitHeight="70.0" fitWidth="72.0">
+                                       <image>
+                                          <Image url="@../img/download.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label prefHeight="201.0" prefWidth="137.0" text="Every book is a new world waiting." textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font name="Charter Bold" size="27.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="36.0" layoutY="281.0" prefHeight="25.0" prefWidth="43.0" text="Books" textAlignment="CENTER" textFill="WHITE" />
+                                    <Label fx:id="lblBookCount" alignment="CENTER" prefHeight="35.0" prefWidth="81.0" textFill="WHITE" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" layoutX="159.0" layoutY="10.0" prefHeight="346.0" prefWidth="156.0" style="-fx-background-color: #414833;">
+                                 <effect>
+                                    <Bloom />
+                                 </effect>
+                                 <children>
+                                    <ImageView fitHeight="69.0" fitWidth="74.0">
+                                       <image>
+                                          <Image url="@../img/customerlogo.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label prefHeight="201.0" prefWidth="137.0" text="Every reader is a story in progress." textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font name="Charter Bold" size="27.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" prefHeight="25.0" prefWidth="66.0" text="Customers" textFill="WHITE" />
+                                    <Label fx:id="lblCustomerCount" alignment="CENTER" prefHeight="37.0" prefWidth="79.0" textFill="WHITE" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" layoutX="254.0" layoutY="10.0" prefHeight="346.0" prefWidth="156.0" style="-fx-background-color: #472d30;">
+                                 <effect>
+                                    <Bloom />
+                                 </effect>
+                                 <children>
+                                    <ImageView fitHeight="70.0" fitWidth="71.0">
+                                       <image>
+                                          <Image url="@../img/rentalslogo.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label prefHeight="201.0" prefWidth="137.0" text="A book shared is a journey multiplied." textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font name="Charter Bold" size="27.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="25.0" prefWidth="43.0" text="Rentals" textFill="WHITE" />
+                                    <Label fx:id="lblRentalCount" alignment="CENTER" prefHeight="32.0" prefWidth="85.0" textFill="WHITE" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <ImageView fitHeight="231.0" fitWidth="279.0" layoutX="23.0" layoutY="124.0">
                      <image>
                         <Image url="@../img/gettyimages-1487737886-612x612.jpg" />
                      </image>
                   </ImageView>
+                  <Label alignment="CENTER" layoutX="235.0" layoutY="38.0" prefHeight="25.0" prefWidth="307.0" text="Panadura Library" textFill="#4a0c0c">
+                     <font>
+                        <Font name="Courier New" size="26.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children>

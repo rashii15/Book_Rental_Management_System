@@ -1,10 +1,10 @@
 package edu.RL.service;
 
-import edu.RL.dto.Customer;
-import edu.RL.dto.Rental;
+import edu.RL.dto.RentalReportDTO;
 import edu.RL.dto.User;
-import edu.RL.repository.UserRepository;
+import edu.RL.repository.Repository.UserRepository;
 import edu.RL.repository.UserRepositoryImpl;
+import edu.RL.service.Service.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -13,6 +13,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
@@ -73,6 +75,26 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<RentalReportDTO> getDailyRentalReport() throws SQLException {
+        List<RentalReportDTO> list = new ArrayList<>();
+        ResultSet resultSet = userRepository.getDailyRentalReport();
+        while(resultSet.next()) {
+            list.add(new RentalReportDTO(
+                    resultSet.getString("rental_id"),
+                    resultSet.getString("book_title"),
+                    resultSet.getString("customer_name"),
+                    resultSet.getString("issue_date"),
+                    resultSet.getString("due_date"),
+                    resultSet.getString("return_date") != null ? resultSet.getString("return_date") : "-",
+                    resultSet.getString("status"),
+                    resultSet.getDouble("fine")
+            ));
+        }
+        return list;
+    }
+
 
     @Override
     public void deleteUser(String userId) {
@@ -184,22 +206,4 @@ public class UserServiceImpl implements UserService {
 
 
 }
-
-
-//        ResultSet resultSet = userRepository.login(username,password);
-//        try {
-//            if (resultSet.next()) {
-//                return new User(
-//                        resultSet.getString("user_id"),
-//                        resultSet.getString("username"),
-//                        resultSet.getString("password"),
-//                        resultSet.getString("role"),
-//                        resultSet.getString("status")
-//                );
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return null;
-
 

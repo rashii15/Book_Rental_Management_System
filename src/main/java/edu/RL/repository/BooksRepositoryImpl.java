@@ -2,13 +2,14 @@ package edu.RL.repository;
 
 import edu.RL.db.DBConnection;
 import edu.RL.dto.Book;
+import edu.RL.repository.Repository.BooksRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BooksRepositoryImpl implements BooksRepository{
+public class BooksRepositoryImpl implements BooksRepository {
 
     private Connection connection;
 
@@ -108,5 +109,11 @@ public class BooksRepositoryImpl implements BooksRepository{
         PreparedStatement psTm = connection.prepareStatement("UPDATE book SET availableNoOfCopies=availableNoOfCopies+1 WHERE book_id =?");
         psTm.setObject(1, bookId);
         psTm.executeUpdate();
+    }
+
+    @Override
+    public int getBookCount() throws SQLException {
+        ResultSet rs = connection.prepareStatement("SELECT COUNT(*) FROM book").executeQuery();
+        return rs.next() ? rs.getInt(1) : 0;
     }
 }

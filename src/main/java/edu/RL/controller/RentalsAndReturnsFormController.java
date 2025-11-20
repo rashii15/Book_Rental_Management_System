@@ -2,9 +2,8 @@ package edu.RL.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import edu.RL.dto.Customer;
 import edu.RL.dto.Rental;
-import edu.RL.service.RentalService;
+import edu.RL.service.Service.RentalService;
 import edu.RL.service.RentalServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -85,6 +84,7 @@ public class RentalsAndReturnsFormController implements Initializable {
             if(!rentalService.isAvailable(txtbookId.getText())){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "This book is currently not available");
                 alert.show();
+                return;
             }
             if (!rentalService.canBorrow(txtcusId.getText(), txtbookId.getText())) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "This customer has already borrowed this book and not returned it!");

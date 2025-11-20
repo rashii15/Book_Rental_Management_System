@@ -1,4 +1,4 @@
-package edu.RL.service;
+package edu.RL.service.Service;
 
 import java.sql.SQLException;
 

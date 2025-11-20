@@ -3,7 +3,7 @@ package edu.RL.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import edu.RL.dto.User;
-import edu.RL.service.UserService;
+import edu.RL.service.Service.UserService;
 import edu.RL.service.UserServiceImpl;
 import edu.RL.util.EmailUtil;
 import edu.RL.util.OTPUtil;
@@ -30,7 +30,6 @@ public class ForgotPasswordController {
     void btnSendOTPOnAction(ActionEvent event) throws Exception {
         String email = txtEmail.getText();
 
-        // 1. Check if email exists in database
         User user = userService.findByEmail(email);
 
         if (user == null) {
@@ -38,16 +37,12 @@ public class ForgotPasswordController {
             return;
         }
 
-        // 2. Generate OTP
         String otp = OTPUtil.generateOTP();
 
-        // 3. Save OTP temporarily in database
         userService.saveOTP(email, otp);
 
-        // 4. Send OTP to email
         EmailUtil.sendOTP(email, otp);
 
-        // 5. Proceed to OTP verification screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/VerifyOTP.fxml"));
         Parent root = loader.load();
 

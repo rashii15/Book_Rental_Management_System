@@ -2,24 +2,19 @@ package edu.RL.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import edu.RL.service.ResetPasswordService;
+import edu.RL.service.Service.ResetPasswordService;
 import edu.RL.service.ResetPasswordServiceImpl;
-import edu.RL.service.UserService;
-import edu.RL.service.UserServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class ResetPasswordController {
-    UserService userService =  new UserServiceImpl();
     private String email;
 
     public void setEmail(String email) {

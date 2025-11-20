@@ -1,4 +1,4 @@
-package edu.RL.service;
+package edu.RL.service.Service;
 
 import edu.RL.dto.Rental;
 import javafx.collections.ObservableList;
@@ -26,4 +26,6 @@ public interface RentalService {
     double calculateFine(Rental rental);
 
     boolean canBorrow(String cusID, String bookId) throws SQLException;
+
+    int getRentalCount();
 }

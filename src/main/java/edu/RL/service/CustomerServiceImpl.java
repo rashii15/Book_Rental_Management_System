@@ -1,18 +1,17 @@
 package edu.RL.service;
 
-import edu.RL.dto.Book;
 import edu.RL.dto.Customer;
-import edu.RL.repository.CustomerRepository;
+import edu.RL.repository.Repository.CustomerRepository;
 import edu.RL.repository.CustomerRepositoryImpl;
+import edu.RL.service.Service.CustomerService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
     CustomerRepository customerRepository = new CustomerRepositoryImpl();
 
@@ -98,6 +97,15 @@ public class CustomerServiceImpl implements CustomerService{
     public void deleteCustomer(String cusId) {
         try {
             customerRepository.deleteCustomer(cusId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int getCustomerCount() {
+        try {
+            return customerRepository.getCustomerCount();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

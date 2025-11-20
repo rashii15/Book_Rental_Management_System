@@ -1,4 +1,4 @@
-package edu.RL.repository;
+package edu.RL.repository.Repository;
 
 import edu.RL.dto.User;
 
@@ -30,4 +30,6 @@ public interface UserRepository {
     boolean deleteOTP(Connection connection,String email) throws SQLException;
 
     void updateUser(String userId, String username, String role, String status, String email) throws SQLException;
+
+    ResultSet getDailyRentalReport() throws SQLException;
 }

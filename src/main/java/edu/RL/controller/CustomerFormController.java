@@ -2,22 +2,19 @@ package edu.RL.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import edu.RL.dto.Book;
 import edu.RL.dto.Customer;
-import edu.RL.service.CustomerService;
+import edu.RL.service.Service.CustomerService;
 import edu.RL.service.CustomerServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class CustomerFormController implements Initializable {

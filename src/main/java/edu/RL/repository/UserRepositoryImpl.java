@@ -2,13 +2,14 @@ package edu.RL.repository;
 
 import edu.RL.db.DBConnection;
 import edu.RL.dto.User;
+import edu.RL.repository.Repository.UserRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
     @Override
     public ResultSet getAll() throws SQLException {
         return DBConnection.getInstance().getConnection().prepareStatement("SELECT * FROM user").executeQuery();
@@ -44,6 +45,21 @@ public class UserRepositoryImpl implements UserRepository{
         psTm.setObject(5,userId);
 
         psTm.executeUpdate();
+    }
+
+    @Override
+    public ResultSet getDailyRentalReport() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement psTm =  connection.prepareStatement("SELECT r.rental_id, b.title AS book_title, c.name AS customer_name, r.issue_date, r.due_date, r.return_date, " +
+                "CASE WHEN r.return_date IS NULL AND r.due_date < CURDATE() THEN 'Overdue' " +
+                "WHEN r.return_date IS NULL THEN 'Not Returned' ELSE 'Returned' END AS status, " +
+                "IFNULL(r.fine,0) AS fine " +
+                "FROM rental r " +
+                "JOIN book b ON r.book_id = b.book_id " +
+                "JOIN customer c ON r.customer_id = c.customer_id " +
+                "WHERE DATE(r.issue_date) = CURDATE()"
+        );
+        return psTm.executeQuery();
     }
 
     @Override

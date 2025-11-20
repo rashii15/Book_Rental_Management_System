@@ -17,12 +17,12 @@ public class EmailUtil {
 
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("rashindilavanya@gmail.com", "jfvw lcmj stqq mgpa");
+                return new PasswordAuthentication("YourEmail@gmail.com", "App password");
             }
         });
 
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("rashindilavanya@gmail.com"));
+        message.setFrom(new InternetAddress("YourEmail@gmail.com"));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
         message.setSubject("Your OTP Code");
         message.setText("Your OTP is: " + otp + "\nValid for 5 minutes.");

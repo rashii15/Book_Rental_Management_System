@@ -1,4 +1,4 @@
-package edu.RL.repository;
+package edu.RL.repository.Repository;
 
 import edu.RL.dto.Book;
 
@@ -23,4 +23,6 @@ public interface BooksRepository {
     void reduceAvailableCopies(String bookId) throws SQLException;
 
     void increaseAvailableCopies(String bookId) throws SQLException;
+
+    int getBookCount() throws SQLException;
 }

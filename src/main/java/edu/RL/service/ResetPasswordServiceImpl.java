@@ -1,18 +1,15 @@
 package edu.RL.service;
 
 import edu.RL.db.DBConnection;
-import edu.RL.dto.User;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import edu.RL.service.Service.ResetPasswordService;
+import edu.RL.service.Service.UserService;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class ResetPasswordServiceImpl implements ResetPasswordService{
+public class ResetPasswordServiceImpl implements ResetPasswordService {
 
     UserService userService =  new UserServiceImpl();
 

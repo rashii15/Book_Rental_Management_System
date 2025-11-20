@@ -1,11 +1,11 @@
 package edu.RL.service;
 
-import edu.RL.dto.Customer;
 import edu.RL.dto.Rental;
-import edu.RL.repository.BooksRepository;
+import edu.RL.repository.Repository.BooksRepository;
 import edu.RL.repository.BooksRepositoryImpl;
-import edu.RL.repository.RentalRepository;
+import edu.RL.repository.Repository.RentalRepository;
 import edu.RL.repository.RentalRepositoryImpl;
+import edu.RL.service.Service.RentalService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class RentalServiceImpl implements RentalService{
+public class RentalServiceImpl implements RentalService {
 
     RentalRepository rentalRepository = new RentalRepositoryImpl();
     BooksRepository booksRepository =  new BooksRepositoryImpl();
@@ -130,11 +130,11 @@ public class RentalServiceImpl implements RentalService{
                     resultSet.getDouble("fine")
             );
 
-            LocalDate returnDate = LocalDate.now(); // actual return date
+            LocalDate returnDate = LocalDate.now();
             double fine = calculateFine(rental);
             rental.setReturnDate(returnDate);
             rental.setFine(fine);
-            rentalRepository.updateRental(rental);  // <-- your existing update method
+            rentalRepository.updateRental(rental);
 
             boolean isReturned = rentalRepository.returnBook(rentalId,bookId,fine);
 
@@ -179,5 +179,14 @@ public class RentalServiceImpl implements RentalService{
             throw new RuntimeException(e);
         }
         return false;
+    }
+
+    @Override
+    public int getRentalCount() {
+        try {
+            return rentalRepository.getRentalCount();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

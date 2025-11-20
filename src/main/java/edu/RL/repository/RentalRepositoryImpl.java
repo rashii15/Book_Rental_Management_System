@@ -2,13 +2,14 @@ package edu.RL.repository;
 
 import edu.RL.db.DBConnection;
 import edu.RL.dto.Rental;
+import edu.RL.repository.Repository.RentalRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
- public class RentalRepositoryImpl implements RentalRepository{
+ public class RentalRepositoryImpl implements RentalRepository {
     @Override
     public ResultSet getAll() throws SQLException {
         return DBConnection.getInstance().getConnection().prepareStatement("SELECT * FROM rental").executeQuery();
@@ -85,5 +86,12 @@ import java.sql.SQLException;
          psTm.setObject(1,cusID);
          psTm.setObject(2,bookId);
          return psTm.executeQuery();
+     }
+
+     @Override
+     public int getRentalCount() throws SQLException {
+         Connection connection = DBConnection.getInstance().getConnection();
+         ResultSet rs = connection.prepareStatement("SELECT COUNT(*) FROM rental").executeQuery();
+         return rs.next() ? rs.getInt(1) : 0;
      }
  }

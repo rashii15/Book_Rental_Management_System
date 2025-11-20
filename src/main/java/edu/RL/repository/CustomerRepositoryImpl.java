@@ -2,13 +2,14 @@ package edu.RL.repository;
 
 import edu.RL.db.DBConnection;
 import edu.RL.dto.Customer;
+import edu.RL.repository.Repository.CustomerRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CustomerRepositoryImpl implements CustomerRepository{
+public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public ResultSet getAll() throws SQLException {
         return DBConnection.getInstance().getConnection().prepareStatement("SELECT * FROM customer").executeQuery();
@@ -68,5 +69,12 @@ public class CustomerRepositoryImpl implements CustomerRepository{
         psTm.setObject(1,cusId);
 
         psTm.executeUpdate();
+    }
+
+    @Override
+    public int getCustomerCount() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        ResultSet rs = connection.prepareStatement("SELECT COUNT(*) FROM customer").executeQuery();
+        return rs.next() ? rs.getInt(1) : 0;
     }
 }

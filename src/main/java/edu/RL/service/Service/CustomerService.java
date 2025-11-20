@@ -1,4 +1,4 @@
-package edu.RL.service;
+package edu.RL.service.Service;
 
 import edu.RL.dto.Customer;
 import javafx.collections.ObservableList;
@@ -17,4 +17,6 @@ public interface CustomerService {
     Customer searchCustomer(String cusId, String name);
 
     void deleteCustomer(String cusId);
+
+    int getCustomerCount();
 }

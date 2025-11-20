@@ -2,7 +2,7 @@ package edu.RL.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import edu.RL.service.UserService;
+import edu.RL.service.Service.UserService;
 import edu.RL.service.UserServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,7 +37,6 @@ public class verifyOTPController {
             return;
         }
 
-        // OTP correct → open ResetPassword screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ResetPassword.fxml"));
         Parent root = loader.load();
 
