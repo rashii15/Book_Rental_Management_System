@@ -33,12 +33,12 @@
                   <Font name="Cochin" size="13.0" />
                </font>
             </JFXTextField>
-            <JFXButton fx:id="btnAddCustomer" alignment="CENTER" buttonType="RAISED" layoutX="624.0" layoutY="346.0" onAction="#btnAddCustomerOnAction" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #A46761;" text="Add Customer">
+            <JFXButton fx:id="btnAddCustomer" alignment="CENTER" buttonType="RAISED" layoutX="624.0" layoutY="353.0" onAction="#btnAddCustomerOnAction" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #A46761;" text="Add Customer">
                <font>
                   <Font name="Helvetica Bold" size="14.0" />
                </font>
             </JFXButton>
-            <TableView fx:id="tableviewCustomers" layoutX="29.0" layoutY="66.0" prefHeight="439.0" prefWidth="562.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="212.0" AnchorPane.topAnchor="63.0">
+            <TableView fx:id="tableviewCustomers" layoutX="29.0" layoutY="66.0" prefHeight="369.0" prefWidth="566.0" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="208.0" AnchorPane.topAnchor="63.0">
                <columns>
                   <TableColumn fx:id="colCustomerId" prefWidth="71.0" text="CustomerId" />
                   <TableColumn fx:id="colname" prefWidth="87.0" text="name" />
@@ -57,7 +57,7 @@
                   <Font name="Cochin" size="13.0" />
                </font>
             </JFXTextField>
-            <JFXButton fx:id="btnUpdateCustomer" alignment="CENTER" buttonType="RAISED" layoutX="624.0" layoutY="429.0" onAction="#btnUpdateCustomerOnAction" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #8b5e34;" text="Update Customer">
+            <JFXButton fx:id="btnUpdateCustomer" alignment="CENTER" buttonType="RAISED" layoutX="439.0" layoutY="462.0" onAction="#btnUpdateCustomerOnAction" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #8b5e34;" text="Update Customer">
                <font>
                   <Font name="Helvetica Bold" size="14.0" />
                </font>
@@ -68,12 +68,12 @@
                </font>
             </JFXTextField>
             <DatePicker fx:id="datePickerDOB" layoutX="614.0" layoutY="214.0" prefHeight="26.0" prefWidth="156.0" promptText="Date of birth" style="-fx-background-color: #e6ccb2;" />
-            <JFXButton fx:id="btnDeleteCustomer" alignment="CENTER" buttonType="RAISED" layoutX="624.0" layoutY="469.0" onAction="#btnDeleteCustomerOnAction" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #8b5e34;" text="Delete Customer">
+            <JFXButton fx:id="btnDeleteCustomer" alignment="CENTER" buttonType="RAISED" layoutX="236.0" layoutY="462.0" onAction="#btnDeleteCustomerOnAction" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #bc4749;" text="Delete Customer">
                <font>
                   <Font name="Helvetica Bold" size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnSearchCustomer" alignment="CENTER" buttonType="RAISED" layoutX="624.0" layoutY="387.0" onAction="#btnSearchCustomerOnAction" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #8b5e34;" text="Search Customer">
+            <JFXButton fx:id="btnSearchCustomer" alignment="CENTER" buttonType="RAISED" layoutX="624.0" layoutY="422.0" onAction="#btnSearchCustomerOnAction" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #8b5e34;" text="Search Customer">
                <font>
                   <Font name="Helvetica Bold" size="14.0" />
                </font>

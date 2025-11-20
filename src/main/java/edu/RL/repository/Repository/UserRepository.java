@@ -32,4 +32,6 @@ public interface UserRepository {
     void updateUser(String userId, String username, String role, String status, String email) throws SQLException;
 
     ResultSet getDailyRentalReport() throws SQLException;
+
+    ResultSet searchUser(String userId, String userName) throws SQLException;
 }

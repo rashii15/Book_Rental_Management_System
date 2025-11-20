@@ -63,6 +63,18 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public ResultSet searchUser(String userId, String username) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String SQL = "SELECT * FROM user WHERE user_id = ? OR username= ?";
+
+        PreparedStatement psTm = connection.prepareStatement(SQL);
+        psTm.setObject(1,userId);
+        psTm.setObject(2,username);
+        ResultSet resultSet = psTm.executeQuery();
+        return resultSet;
+    }
+
+    @Override
     public void deleteUser(String userId) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         PreparedStatement psTm = connection.prepareStatement("DELETE FROM user WHERE user_id =?");

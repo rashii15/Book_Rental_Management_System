@@ -1,5 +1,6 @@
 package edu.RL.service;
 
+import edu.RL.dto.Book;
 import edu.RL.dto.RentalReportDTO;
 import edu.RL.dto.User;
 import edu.RL.repository.Repository.UserRepository;
@@ -93,6 +94,26 @@ public class UserServiceImpl implements UserService {
             ));
         }
         return list;
+    }
+
+    @Override
+    public User searchUser(String userId, String userName) {
+        try {
+            ResultSet resultSet = userRepository.searchUser(userId, userName);
+            resultSet.next();
+            return new User(
+                    resultSet.getString("user_id"),
+                    resultSet.getString("username"),
+                    resultSet.getString("password"),
+                    resultSet.getString("role"),
+                    resultSet.getString("status"),
+                    resultSet.getString("email")
+            );
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "This bookID is not in DataBase");
+            alert.show();
+            throw new RuntimeException(e);
+        }
     }
 
 

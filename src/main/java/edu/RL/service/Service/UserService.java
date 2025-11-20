@@ -36,4 +36,5 @@ public interface UserService {
 
     List<RentalReportDTO> getDailyRentalReport() throws SQLException;
 
+    User searchUser(String userId, String userName);
 }

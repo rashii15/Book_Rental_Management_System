@@ -33,6 +33,9 @@ public class UserFormController implements Initializable {
     private JFXButton btnUpdateUser;
 
     @FXML
+    private JFXButton btnRefresh;
+
+    @FXML
     private TableColumn<?, ?> colEmail;
 
 
@@ -85,22 +88,21 @@ public class UserFormController implements Initializable {
                 txtEmail.getText()
         ));
         loadUserTable();
+        clearFields();
     }
 
     @FXML
     void btnSearchUserOnAction(ActionEvent event) {
-//        User searchUser = userService.searchUser(txtUserId.getText(), txtUsername.getText());
-//        txtTitle.setText(searchBook.getTitle());
-//        txtAuthor.setText(searchBook.getAuthor());
-//        txtCategory.setText(searchBook.getCategory());
-//        txtISBN.setText(searchBook.getIsbn());
-//        txtAvailableCopies.setText(searchBook.getAvailableCopies().toString());
+        User searchUser = userService.searchUser(txtUserId.getText(), txtUsername.getText());
+        comboboxRole.setValue(searchUser.getRole());
+        comboboxStatus.setValue(searchUser.getStatus());
     }
 
     @FXML
     void btnDeleteUserOnAction(ActionEvent event) {
         userService.deleteUser(txtUserId.getText());
         loadUserTable();
+        clearFields();
     }
 
     @FXML
@@ -113,13 +115,13 @@ public class UserFormController implements Initializable {
                 txtEmail.getText()
         );
         loadUserTable();
+        clearFields();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
         colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
-        colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
         colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -141,7 +143,7 @@ public class UserFormController implements Initializable {
     private void setSelectedItem(User user) {
         txtUserId.setText(user.getUserId());
         txtUsername.setText(user.getUsername());
-        txtPassword.setText(user.getPassword());
+        txtPassword.setVisible(false);
         comboboxRole.setValue(user.getRole());
         comboboxStatus.setValue(user.getStatus());
         txtEmail.setText(user.getEmail());
@@ -160,6 +162,19 @@ public class UserFormController implements Initializable {
 
     private void loadUserTable() {
         tableviewUsers.setItems(userService.getAll());
+    }
+    private void clearFields() {
+        setNextId();
+        txtUsername.setText("");
+        txtEmail.setText("");
+        comboboxRole.setValue("");
+        comboboxStatus.setValue("");
+        txtPassword.setVisible(true);
+    }
+
+    @FXML
+    void btnRefreshOnAction(ActionEvent event) {
+        clearFields();
     }
 
 

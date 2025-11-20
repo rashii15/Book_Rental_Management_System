@@ -83,6 +83,7 @@ public class userDashboardController implements Initializable {
     private void applyRoleAccess() {
         if (loggedUser.getRole().equals("STAFF")) {
             btnMngUsers.setVisible(false);
+            btngenerateReport.setVisible(false);
         }
     }
 
