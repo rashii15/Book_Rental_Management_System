@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="517.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.RL.controller.BooksFormController">
+   <children>
+      <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="517.0" prefWidth="795.0" style="-fx-background-color: #ffedd8;">
+               <children>
+                  <StackPane layoutX="21.0" layoutY="63.0" style="-fx-alignment: center;">
+                     <children>
+                        <TableView fx:id="tableviewBooks" prefHeight="383.0" prefWidth="591.0">
+                          <columns>
+                            <TableColumn fx:id="colBookId" prefWidth="75.0" text="BookId" />
+                            <TableColumn fx:id="colTitle" prefWidth="90.0" text="Title" />
+                              <TableColumn fx:id="colAuthor" prefWidth="114.0" text="Author" />
+                              <TableColumn fx:id="colCategory" prefWidth="105.0" text="Category" />
+                              <TableColumn fx:id="colISBN" prefWidth="103.0" text="ISBN" />
+                              <TableColumn fx:id="colAvailableCopies" prefWidth="103.0" text="AvailableCopies" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </StackPane>
+                  <JFXTextField fx:id="txtTitle" labelFloat="true" layoutX="625.0" layoutY="97.0" promptText="Title" style="-fx-background-color: #e6ccb2;">
+                     <font>
+                        <Font name="Cochin" size="13.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtISBN" labelFloat="true" layoutX="625.0" layoutY="233.0" promptText="ISBN" style="-fx-background-color: #e6ccb2;">
+                     <font>
+                        <Font name="Cochin" size="13.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtCategory" labelFloat="true" layoutX="625.0" layoutY="184.0" promptText="Category" style="-fx-background-color: #e6ccb2;">
+                     <font>
+                        <Font name="Cochin" size="13.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtAuthor" labelFloat="true" layoutX="624.9739990234375" layoutY="141.0" promptText="Author" style="-fx-background-color: #e6ccb2;">
+                     <font>
+                        <Font name="Cochin" size="13.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtAvailableCopies" labelFloat="true" layoutX="627.0" layoutY="279.0" promptText="AvailableCopies" style="-fx-background-color: #e6ccb2;">
+                     <font>
+                        <Font name="Cochin" size="13.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXButton fx:id="btnAddBook" alignment="CENTER" buttonType="RAISED" layoutX="646.0" layoutY="343.0" onAction="#btnAddBookOnAction" prefHeight="38.0" prefWidth="114.0" style="-fx-background-color: #A46761;" text="Add Book">
+                     <font>
+                        <Font name="Helvetica Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <Label alignment="CENTER" layoutX="159.0" layoutY="14.0" prefHeight="17.0" prefWidth="312.0" text="Book Management" textFill="#9a5252">
+                     <font>
+                        <Font name="Didot" size="33.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="btnUpdateBook" alignment="CENTER" buttonType="RAISED" layoutX="454.0" layoutY="456.0" onAction="#btnUpdateBookOnAction" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #A46761;" text="Update Book">
+                     <font>
+                        <Font name="Helvetica Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnSearchBook" alignment="CENTER" buttonType="RAISED" layoutX="636.0" layoutY="418.0" onAction="#btnSearchBookOnAction" prefHeight="38.0" prefWidth="135.0" style="-fx-background-color: #A46761;" text="Search Book">
+                     <font>
+                        <Font name="Helvetica Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnDeleteBook" alignment="CENTER" buttonType="RAISED" layoutX="276.0" layoutY="456.0" onAction="#btnDeleteBookOnAction" prefHeight="38.0" prefWidth="142.0" style="-fx-background-color: #bc4749;" text="Delete Book">
+                     <font>
+                        <Font name="Helvetica Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXTextField fx:id="txtBookId" alignment="CENTER" labelFloat="true" layoutX="660.0" layoutY="49.0" prefHeight="29.0" prefWidth="87.0" promptText="BookID" style="-fx-background-color: #e6ccb2;">
+                     <font>
+                        <Font name="Chalkboard" size="15.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXButton fx:id="btnRefresh" alignment="CENTER" buttonType="RAISED" layoutX="660.0" layoutY="14.0" onAction="#btnRefreshOnAction" prefHeight="26.0" prefWidth="84.0" style="-fx-background-color: #A46761;" text="Refresh" textFill="WHITE">
+                     <font>
+                        <Font name="Helvetica Bold" size="11.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
