@@ -33,6 +33,9 @@ public class RentalsAndReturnsFormController implements Initializable {
     private JFXButton btnReturn;
 
     @FXML
+    private JFXButton btnRefresh;
+
+    @FXML
     private TableColumn<?, ?> colBookID;
 
     @FXML
@@ -220,6 +223,16 @@ public class RentalsAndReturnsFormController implements Initializable {
             txtReturnDate.setText(rental.getReturnDate().toString());
             txtFine.setText(String.valueOf(rental.getFine()));
         }
+    }
+    private void clearFields() {
+        setNextId();
+        txtcusId.setText("");
+        txtbookId.setText("");
+    }
+
+    @FXML
+    void btnRefreshOnAction(ActionEvent event) {
+        clearFields();
     }
 }
 

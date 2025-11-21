@@ -156,6 +156,20 @@
                   <Font name="Charter Bold" size="19.0" />
                </font>
             </Label>
+            <HBox alignment="CENTER_LEFT" layoutX="889.0" layoutY="-1.0" prefHeight="65.0" prefWidth="216.0">
+               <children>
+                  <Label fx:id="lblDate" prefHeight="43.0" prefWidth="126.0" text="jh" textFill="WHITE">
+                     <font>
+                        <Font name="Monaco" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTime" layoutX="10.0" layoutY="21.0" prefHeight="43.0" prefWidth="85.0" text="jh" textFill="WHITE">
+                     <font>
+                        <Font name="Monaco" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </Pane>
    </children>

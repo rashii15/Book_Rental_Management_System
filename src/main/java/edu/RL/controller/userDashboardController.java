@@ -7,6 +7,9 @@ import edu.RL.service.Service.BooksService;
 import edu.RL.service.Service.CustomerService;
 import edu.RL.service.Service.RentalService;
 import edu.RL.service.Service.UserService;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,10 +25,14 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import edu.RL.dto.RentalReportDTO;
 import edu.RL.util.DailyReportPDF;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -113,6 +120,12 @@ public class userDashboardController implements Initializable {
     }
 
     @FXML
+    private Label lblDate;
+
+    @FXML
+    private Label lblTime;
+
+    @FXML
     void btnGenerateReportOnAction(ActionEvent event) {
         try {
             List<RentalReportDTO> data = userService.getDailyRentalReport();
@@ -171,6 +184,19 @@ public class userDashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        LocalDate today = LocalDate.now();
+        lblDate.setText(today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
+        // Set time (updates every second)
+        Timeline clock = new Timeline(
+                new KeyFrame(Duration.ZERO, e -> {
+                    LocalTime currentTime = LocalTime.now();
+                    lblTime.setText(currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+                }),
+                new KeyFrame(Duration.seconds(1))
+        );
+        clock.setCycleCount(Animation.INDEFINITE);
+        clock.play();
         btnDashboardOnAction();
         loadDashboardCounts();
     }

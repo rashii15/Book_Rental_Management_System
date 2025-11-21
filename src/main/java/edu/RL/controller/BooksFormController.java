@@ -64,6 +64,9 @@ public class BooksFormController implements Initializable{
     private TableView<Book> tableviewBooks;
 
     @FXML
+    private JFXButton btnRefresh;
+
+    @FXML
     void btnAddBookOnAction(ActionEvent event) {
         booksService.addBook(new Book(
                 txtBookId.getText(),
@@ -74,12 +77,14 @@ public class BooksFormController implements Initializable{
                 Integer.parseInt(txtAvailableCopies.getText())
         ));
         loadBookTable();
+        clearFields();
     }
 
     @FXML
     void btnDeleteBookOnAction(ActionEvent event) {
         booksService.deleteBook(txtBookId.getText());
         loadBookTable();
+        clearFields();
     }
 
     @FXML
@@ -103,6 +108,7 @@ public class BooksFormController implements Initializable{
                 Integer.parseInt(txtAvailableCopies.getText())
         ));
         loadBookTable();
+        clearFields();
     }
 
 
@@ -147,5 +153,23 @@ public class BooksFormController implements Initializable{
         String nextId = booksService.generateNextBookId();
         txtBookId.setText(nextId);
 
+    }
+
+    private void clearFields() {
+        try {
+            setNextId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        txtTitle.setText("");
+        txtAuthor.setText("");
+        txtCategory.setText("");
+        txtISBN.setText("");
+        txtAvailableCopies.setText("");
+    }
+
+    @FXML
+    void btnRefreshOnAction(ActionEvent event) {
+        clearFields();
     }
 }

@@ -73,6 +73,9 @@ public class CustomerFormController implements Initializable {
     public DatePicker datePickerDOB;
 
     @FXML
+    private JFXButton btnRefresh;
+
+    @FXML
     void btnAddCustomerOnAction(ActionEvent event) {
         customerService.addCustomer(new Customer(
                 txtCustomerId.getText(),
@@ -84,12 +87,14 @@ public class CustomerFormController implements Initializable {
                 txtPostalCode.getText()
         ));
         loadCustomerTable();
+        clearFields();
     }
 
     @FXML
     void btnDeleteCustomerOnAction(ActionEvent event) {
         customerService.deleteCustomer(txtCustomerId.getText());
         loadCustomerTable();
+        clearFields();
     }
 
     @FXML
@@ -104,6 +109,7 @@ public class CustomerFormController implements Initializable {
                 txtPostalCode.getText()));
 
         loadCustomerTable();
+        clearFields();
     }
 
     @FXML
@@ -159,5 +165,20 @@ public class CustomerFormController implements Initializable {
         datePickerDOB.setValue(customer.getDOB());
         txtAddress.setText(customer.getAddress());
         txtPostalCode.setText(customer.getPostalCode());
+    }
+
+    private void clearFields() {
+        setNextId();
+        txtName.setText("");
+        txtContact.setText("");
+        txtEmail.setText("");
+        datePickerDOB.setValue(null);
+        txtAddress.setText("");
+        txtPostalCode.setText("");
+    }
+
+    @FXML
+    void btnRefreshOnAction(ActionEvent event) {
+        clearFields();
     }
 }
