@@ -63,6 +63,9 @@ public class userDashboardController implements Initializable {
     private JFXButton btngenerateReport;
 
     @FXML
+    private JFXButton btndashboard;
+
+    @FXML
     private Label lbldashboard;
 
     @FXML
@@ -116,7 +119,14 @@ public class userDashboardController implements Initializable {
 
     @FXML
     void btnDashboardOnAction() {
-//        loadUI("UserDashboard.fxml");
+        try {
+            Stage stage = (Stage) btndashboard.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("/view/UserDashboard.fxml"));
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -197,7 +207,6 @@ public class userDashboardController implements Initializable {
         );
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
-        btnDashboardOnAction();
         loadDashboardCounts();
     }
 }

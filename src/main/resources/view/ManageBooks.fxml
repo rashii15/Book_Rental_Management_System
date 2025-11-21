@@ -20,11 +20,11 @@
                         <TableView fx:id="tableviewBooks" prefHeight="383.0" prefWidth="591.0">
                           <columns>
                             <TableColumn fx:id="colBookId" prefWidth="75.0" text="BookId" />
-                            <TableColumn fx:id="colTitle" prefWidth="83.0" text="Title" />
-                              <TableColumn fx:id="colAuthor" prefWidth="75.0" text="Author" />
-                              <TableColumn fx:id="colCategory" prefWidth="119.0" text="Category" />
-                              <TableColumn fx:id="colISBN" prefWidth="108.0" text="ISBN" />
-                              <TableColumn fx:id="colAvailableCopies" prefWidth="101.0" text="AvailableCopies" />
+                            <TableColumn fx:id="colTitle" prefWidth="90.0" text="Title" />
+                              <TableColumn fx:id="colAuthor" prefWidth="114.0" text="Author" />
+                              <TableColumn fx:id="colCategory" prefWidth="105.0" text="Category" />
+                              <TableColumn fx:id="colISBN" prefWidth="103.0" text="ISBN" />
+                              <TableColumn fx:id="colAvailableCopies" prefWidth="103.0" text="AvailableCopies" />
                           </columns>
                         </TableView>
                      </children>

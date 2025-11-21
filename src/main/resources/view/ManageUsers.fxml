@@ -69,7 +69,7 @@
                   <Font name="Cochin" size="13.0" />
                </font>
             </JFXTextField>
-            <JFXButton fx:id="btnRefresh" alignment="CENTER" buttonType="RAISED" layoutX="661.0" layoutY="14.0" onAction="#btnRefreshOnAction" prefHeight="26.0" prefWidth="84.0" style="-fx-background-color: #A46761;" text="Refresh" textFill="WHITE">
+            <JFXButton fx:id="btnRefresh" alignment="CENTER" buttonType="RAISED" layoutX="663.0" layoutY="14.0" onAction="#btnRefreshOnAction" prefHeight="26.0" prefWidth="84.0" style="-fx-background-color: #A46761;" text="Refresh" textFill="WHITE">
                <font>
                   <Font name="Helvetica Bold" size="11.0" />
                </font>

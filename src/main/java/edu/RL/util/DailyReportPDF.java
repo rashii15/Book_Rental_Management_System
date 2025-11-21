@@ -37,7 +37,7 @@ public class DailyReportPDF {
         document.add(title);
         document.add(Chunk.NEWLINE);
 
-        Paragraph address = new Paragraph("Panadura Library,\nNo.123, Main Rd, Panadura\nTel : 038 2248 543");
+        Paragraph address = new Paragraph("BORROWLY,\nNo.123, Main Rd, Panadura\nTel : 038 2248 543");
         address.setAlignment(Element.ALIGN_CENTER);
         document.add(address);
         document.add(Chunk.NEWLINE);

@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="653.0" prefWidth="1103.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.RL.controller.userDashboardController">
    <children>
-      <AnchorPane layoutY="-6.0" prefHeight="661.0" prefWidth="1103.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="661.0" prefWidth="1103.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane layoutX="14.0" layoutY="112.0" prefHeight="517.0" prefWidth="250.0" style="-fx-background-color: #fefdeb;" AnchorPane.rightAnchor="846.0" AnchorPane.topAnchor="112.0">
                <children>
@@ -130,11 +130,16 @@
                         <Image url="@../img/gettyimages-1487737886-612x612.jpg" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="235.0" layoutY="38.0" prefHeight="25.0" prefWidth="307.0" text="Panadura Library" textFill="#4a0c0c">
+                  <Label alignment="CENTER" layoutX="85.0" layoutY="51.0" prefHeight="59.0" prefWidth="155.0" text="BORROWLY" textFill="#111010">
                      <font>
-                        <Font name="Courier New" size="26.0" />
+                        <Font name="Kokonor Regular" size="20.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="74.0" fitWidth="91.0" layoutX="117.0" layoutY="7.0">
+                     <image>
+                        <Image url="@../img/original-922aedbea5c0b60dea18fe2f29d6b202-removebg-preview.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
          </children>
@@ -158,12 +163,12 @@
             </Label>
             <HBox alignment="CENTER_LEFT" layoutX="889.0" layoutY="-1.0" prefHeight="65.0" prefWidth="216.0">
                <children>
-                  <Label fx:id="lblDate" prefHeight="43.0" prefWidth="126.0" text="jh" textFill="WHITE">
+                  <Label fx:id="lblDate" prefHeight="43.0" prefWidth="126.0" textFill="WHITE">
                      <font>
                         <Font name="Monaco" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTime" layoutX="10.0" layoutY="21.0" prefHeight="43.0" prefWidth="85.0" text="jh" textFill="WHITE">
+                  <Label fx:id="lblTime" layoutX="10.0" layoutY="21.0" prefHeight="43.0" prefWidth="85.0" textFill="WHITE">
                      <font>
                         <Font name="Monaco" size="16.0" />
                      </font>
